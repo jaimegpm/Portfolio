@@ -6,8 +6,8 @@ import Projects from './components/sections/Projects';
 import Contact from './components/sections/Contact';
 
 /**
- * Componente principal de la aplicación
- * Estructura el portfolio utilizando el Layout y las diferentes secciones
+ * Main application component
+ * Structures the portfolio using Layout and different sections
  */
 function App() {
   return (

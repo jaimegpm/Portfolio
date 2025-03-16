@@ -4,109 +4,83 @@ import { projectImages } from '../../data/placeholderImages';
 import { setupIntersectionObserver, animateElementsWithDelay } from '../../utils/animations';
 
 /**
- * Projects Component
- * Portfolio projects section
- * Following BEM methodology for classes
+ * Projects section component displaying portfolio work with filtering and animations
  */
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState([]);
   const projectsRef = useRef(null);
   
-  // Project data
+  // Project data array
   const projects = [
     {
       id: 1,
-      title: 'Personal Portfolio',
-      description: 'A responsive portfolio website built with React and Tailwind CSS featuring dark mode and smooth animations.',
-      image: projectImages.webProject3,
+      title: 'Sports Betting Platform',
+      description: 'An interactive sports betting platform featuring real-time odds updates, user authentication, and a responsive design. Users can place virtual bets on various sports events, track their betting history, and compete on a global leaderboard.',
+      image: projectImages.webProject1,
       category: 'web',
-      technologies: ['React', 'Tailwind CSS', 'JavaScript'],
-      demoUrl: '#',
-      codeUrl: 'https://github.com/jaimegpm',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'API Integration'],
+      demoUrl: 'https://jaimegpm.github.io/BettingsGPM/',
+      codeUrl: 'https://github.com/jaimegpm/BettingsGPM',
     },
     {
       id: 2,
-      title: 'E-commerce App',
-      description: 'Mobile application for online shopping with user authentication, product catalog, and shopping cart functionality.',
-      image: projectImages.mobileProject1,
-      category: 'mobile',
-      technologies: ['React Native', 'Firebase', 'JavaScript'],
-      demoUrl: '#',
-      codeUrl: 'https://github.com/jaimegpm',
+      title: 'Lost Ark Bus Tool',
+      description: 'A specialized utility for Lost Ark players who run "bus services" in raids. This tool calculates optimal gold distribution among party members, tracks contributions, and provides a clean interface for managing payments after successful raid completions.',
+      image: projectImages.webProject2,
+      category: 'web',
+      technologies: ['HTML', 'CSS', 'JavaScript', 'LocalStorage'],
+      demoUrl: 'https://jaimegpm.github.io/bus-tool/',
+      codeUrl: 'https://github.com/jaimegpm/bus-tool',
     },
     {
       id: 3,
-      title: 'Task Management System',
-      description: 'Web application for managing tasks and projects with drag-and-drop functionality and team collaboration features.',
-      image: projectImages.webProject1,
-      category: 'web',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      demoUrl: '#',
-      codeUrl: 'https://github.com/jaimegpm',
+      title: 'Library Management System',
+      description: 'A robust Java desktop application for comprehensive library management. Features include book cataloging with search functionality, member registration and tracking, loan management with due date notifications, and detailed reporting. Built with a user-friendly Swing interface and JDBC for database operations.',
+      image: projectImages.desktopProject1,
+      category: 'desktop',
+      technologies: ['Java', 'JDBC', 'SQL', 'Swing'],
+      demoUrl: null,
+      codeUrl: 'https://github.com/jaimegpm/Biblioteca',
     },
     {
       id: 4,
-      title: 'Weather Dashboard',
-      description: 'Interactive weather application that displays real-time weather data and forecasts using external API integration.',
-      image: projectImages.webProject2,
-      category: 'web',
-      technologies: ['JavaScript', 'HTML/CSS', 'API Integration'],
-      demoUrl: '#',
-      codeUrl: 'https://github.com/jaimegpm',
-    },
-    {
-      id: 5,
-      title: 'Fitness Tracker',
-      description: 'Mobile app for tracking workouts, nutrition, and fitness progress with personalized recommendations.',
-      image: projectImages.mobileProject2,
-      category: 'mobile',
-      technologies: ['React Native', 'Redux', 'Firebase'],
-      demoUrl: '#',
-      codeUrl: 'https://github.com/jaimegpm',
-    },
-    {
-      id: 6,
-      title: 'Inventory Management',
-      description: 'Desktop application for managing inventory, sales, and customer data for small businesses.',
-      image: projectImages.desktopProject1,
+      title: 'HEIC to JPG Converter',
+      description: 'A lightweight yet powerful Python utility that solves the common problem of converting HEIC images from iOS devices to the universally compatible JPG format. Features batch processing capabilities, metadata preservation, and a simple command-line interface for efficient workflow integration.',
+      image: projectImages.webProject3,
       category: 'desktop',
-      technologies: ['Electron', 'React', 'SQLite'],
-      demoUrl: '#',
-      codeUrl: 'https://github.com/jaimegpm',
+      technologies: ['Python', 'Image Processing'],
+      demoUrl: null,
+      codeUrl: 'https://github.com/jaimegpm/Heic-to-JPG',
     },
   ];
   
-  // Filter categories
+  // Available filter categories
   const categories = [
     { id: 'all', name: 'All' },
     { id: 'web', name: 'Web' },
-    { id: 'mobile', name: 'Mobile' },
     { id: 'desktop', name: 'Desktop' },
   ];
   
-  // Effect for filtering projects
+  // Handle project filtering with animation
   useEffect(() => {
     const filtered = activeFilter === 'all'
       ? projects
       : projects.filter(project => project.category === activeFilter);
     
-    // Fade animation
     setVisibleProjects([]);
     setTimeout(() => {
       setVisibleProjects(filtered);
     }, 300);
   }, [activeFilter]);
   
-  // Effect for scroll animations
+  // Setup scroll animations for project cards
   useEffect(() => {
     if (projectsRef.current && visibleProjects.length > 0) {
-      // Set up the intersection observer
       const observer = setupIntersectionObserver(
         projectsRef.current, 
         { threshold: 0.1 }, 
         (target) => {
-          // Animate projects with staggered delay
           animateElementsWithDelay(
             target, 
             '.projects__item', 
@@ -133,12 +107,12 @@ const Projects = () => {
           subtitle="A selection of my recent work and academic projects"
         />
         
-        {/* Filters */}
-        <div className="projects__filters flex flex-wrap justify-center mb-12">
+        {/* Category filter buttons */}
+        <div className="projects__filters flex flex-wrap justify-center mb-12 max-w-md mx-auto">
           {categories.map(category => (
             <button
               key={category.id}
-              className={`projects__filter-btn px-6 py-2 mx-2 mb-2 rounded-full transition-colors ${
+              className={`projects__filter-btn px-6 py-2.5 mx-3 mb-3 rounded-full transition-colors ${
                 activeFilter === category.id
                   ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-md'
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
@@ -150,83 +124,96 @@ const Projects = () => {
           ))}
         </div>
         
-        {/* Projects */}
+        {/* Project grid */}
         <div 
           ref={projectsRef}
-          className="projects__grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="projects__grid grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto"
         >
           {visibleProjects.map(project => (
             <div 
               key={project.id} 
-              className="projects__item opacity-0 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 group"
+              className="projects__item opacity-0 bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group"
               style={{ transitionDelay: `${(project.id - 1) * 100}ms` }}
             >
-              {/* Project image */}
-              <div className="projects__item-image-container relative overflow-hidden h-64">
+              <div className="projects__item-container relative overflow-hidden h-96 sm:h-80 md:h-72 lg:h-80">
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className="projects__item-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="projects__item-image w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 group-hover:filter group-hover:brightness-50"
                 />
-                <div className="projects__item-overlay absolute inset-0 bg-gradient-to-t from-primary-dark/80 to-secondary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="projects__item-actions flex space-x-4">
-                    <a 
-                      href={project.demoUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="projects__item-link p-3 bg-white rounded-full text-primary hover:bg-gray-100 transition-colors transform hover:scale-110"
-                      aria-label="View demo"
-                    >
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                    </a>
+                
+                <div className="projects__item-title-container absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-6 transform transition-all duration-500 ease-out group-hover:translate-y-full">
+                  <h3 className="projects__item-title text-xl font-bold text-white flex items-center">
+                    {project.title}
+                    <svg className="w-5 h-5 ml-2 text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </h3>
+                  <p className="text-sm text-gray-300 mt-1 opacity-80">Click to view details</p>
+                </div>
+                
+                {/* Hover overlay with project details */}
+                <div className="projects__item-overlay absolute inset-0 bg-gradient-to-b from-primary-dark/90 to-secondary/90 flex flex-col justify-center p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-8 group-hover:translate-y-0">
+                  <h3 className="projects__item-title text-2xl font-bold mb-4 text-white transform translate-y-4 opacity-0 transition-all duration-300 delay-75 group-hover:translate-y-0 group-hover:opacity-100">
+                    {project.title}
+                  </h3>
+                  <p className="projects__item-description text-white/90 mb-6 transform translate-y-4 opacity-0 transition-all duration-300 delay-100 group-hover:translate-y-0 group-hover:opacity-100">
+                    {project.description}
+                  </p>
+                  
+                  <div className="projects__item-technologies flex flex-wrap gap-2 mb-6 transform translate-y-4 opacity-0 transition-all duration-300 delay-150 group-hover:translate-y-0 group-hover:opacity-100">
+                    {project.technologies.map((tech, index) => (
+                      <span 
+                        key={index} 
+                        className="projects__item-tech px-3 py-1 text-xs font-medium bg-white/20 text-white rounded-full backdrop-blur-sm"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div className="projects__item-actions flex space-x-4 mt-auto transform translate-y-4 opacity-0 transition-all duration-300 delay-200 group-hover:translate-y-0 group-hover:opacity-100">
+                    {project.demoUrl && (
+                      <a 
+                        href={project.demoUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="projects__item-link flex items-center px-4 py-2 bg-white rounded-md text-primary hover:bg-gray-100 transition-colors transform hover:scale-105"
+                        aria-label={`Live demo of ${project.title}`}
+                      >
+                        <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Live Demo
+                      </a>
+                    )}
                     <a 
                       href={project.codeUrl} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="projects__item-link p-3 bg-white rounded-full text-primary hover:bg-gray-100 transition-colors transform hover:scale-110"
-                      aria-label="View code"
+                      className="projects__item-link flex items-center px-4 py-2 bg-white rounded-md text-primary hover:bg-gray-100 transition-colors transform hover:scale-105"
+                      aria-label={`View source code of ${project.title}`}
                     >
-                      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                       </svg>
+                      View Code
                     </a>
                   </div>
-                </div>
-              </div>
-              
-              {/* Project content */}
-              <div className="projects__item-content p-6">
-                <h3 className="projects__item-title text-xl font-bold mb-2 text-gray-900 dark:text-white">
-                  {project.title}
-                </h3>
-                <p className="projects__item-description text-gray-600 dark:text-gray-400 mb-4">
-                  {project.description}
-                </p>
-                <div className="projects__item-technologies flex flex-wrap gap-2 mt-4">
-                  {project.technologies.map((tech, index) => (
-                    <span 
-                      key={index} 
-                      className="projects__item-tech px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
                 </div>
               </div>
             </div>
           ))}
         </div>
         
-        {/* Button to view more projects */}
-        <div className="projects__more text-center mt-12">
+        {/* View more projects button */}
+        <div className="projects__more text-center mt-16">
           <a 
-            href="https://github.com/jaimegpm" 
+            href="https://github.com/jaimegpm?tab=repositories" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="projects__more-btn inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-secondary-dark text-white hover:text-white dark:text-white dark:hover:text-white font-medium rounded-md transition-colors shadow-md hover:shadow-lg"
+            className="projects__more-btn inline-flex items-center px-8 py-3.5 bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-secondary-dark text-white hover:text-white dark:text-white dark:hover:text-white font-medium rounded-md transition-colors shadow-md hover:shadow-lg"
           >
             View More Projects
             <svg className="w-5 h-5 ml-2 text-white dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -239,4 +226,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;

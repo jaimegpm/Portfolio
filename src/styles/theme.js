@@ -1,6 +1,6 @@
 /**
- * Configuración de temas y colores para el portfolio
- * Siguiendo la metodología BEM y utilizando Tailwind
+ * Theme and color configuration for the portfolio
+ * Following BEM methodology and using Tailwind
  */
 
 export const COLORS = {
@@ -28,6 +28,16 @@ export const COLORS = {
     light: '#1F2937', // gray-800
     DEFAULT: '#111827', // gray-900
     dark: '#F9FAFB', // gray-50
+  },
+  cursor: {
+    light: {
+      primary: 'rgba(59, 130, 246, 0.5)', // blue-500 with opacity
+      secondary: 'rgba(37, 99, 235, 0.3)', // blue-600 with opacity
+    },
+    dark: {
+      primary: 'rgba(219, 39, 119, 0.5)', // pink-600 with opacity
+      secondary: 'rgba(124, 58, 237, 0.3)', // violet-600 with opacity
+    }
   }
 };
 

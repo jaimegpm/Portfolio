@@ -4,21 +4,17 @@ import { setupIntersectionObserver } from '../../utils/animations';
 
 /**
  * Skills Component
- * Technical skills section of the portfolio with infinite scrolling animation
- * Following BEM methodology for classes
+ * Displays technical and soft skills with animated scroll effects
  */
 const Skills = () => {
   const skillsRef = useRef(null);
   
-  // Effect for scroll animations
   useEffect(() => {
     if (skillsRef.current) {
-      // Set up the intersection observer for soft skills animation
       const observer = setupIntersectionObserver(
         skillsRef.current,
         { threshold: 0.2 },
         (target) => {
-          // Animate soft skills charts with staggered delay
           const skillCharts = target.querySelectorAll('.skills__soft-circle-progress');
           skillCharts.forEach((chart, index) => {
             setTimeout(() => {
@@ -35,8 +31,7 @@ const Skills = () => {
       };
     }
   }, []);
-  
-  // Tech skills for each row
+
   const frontendSkills = [
     { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
     { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
@@ -66,7 +61,6 @@ const Skills = () => {
     { name: 'NPM', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg' },
   ];
   
-  // Soft skills data
   const softSkills = [
     { name: 'Communication', value: 85 },
     { name: 'Teamwork', value: 90 },
@@ -76,7 +70,9 @@ const Skills = () => {
     { name: 'Creativity', value: 85 },
   ];
   
-  // Crear conjuntos duplicados para asegurar una animación continua
+  /**
+   * Creates an infinite loop of skills by tripling the array
+   */
   const createInfiniteLoop = (skills) => {
     return [...skills, ...skills, ...skills];
   };
@@ -90,13 +86,12 @@ const Skills = () => {
           subtitle="Technologies and tools I work with"
         />
         
-        {/* Infinite scrolling tech skills */}
         <div className="skills__tech-scroll mb-12">
           <h3 className="skills__subtitle text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200 text-center">
             Technical Skills
           </h3>
           
-          {/* Row 1 - Frontend - Velocidad normal */}
+          {/* Frontend skills - Normal speed */}
           <div className="skills__marquee mb-4">
             <div className="skills__marquee-track animate-scroll-left flex" style={{ animationDuration: '25s' }}>
               {createInfiniteLoop(frontendSkills).map((skill, index) => (
@@ -110,7 +105,7 @@ const Skills = () => {
             </div>
           </div>
           
-          {/* Row 2 - Backend - Velocidad más rápida */}
+          {/* Backend skills - Fast speed */}
           <div className="skills__marquee mb-4">
             <div className="skills__marquee-track animate-scroll-right flex" style={{ animationDuration: '20s' }}>
               {createInfiniteLoop(backendSkills).map((skill, index) => (
@@ -124,7 +119,7 @@ const Skills = () => {
             </div>
           </div>
           
-          {/* Row 3 - Tools - Velocidad más lenta */}
+          {/* Tools skills - Slow speed */}
           <div className="skills__marquee">
             <div className="skills__marquee-track animate-scroll-left flex" style={{ animationDuration: '30s' }}>
               {createInfiniteLoop(toolsSkills).map((skill, index) => (
@@ -139,7 +134,7 @@ const Skills = () => {
           </div>
         </div>
         
-        {/* Soft skills (circular chart) */}
+        {/* Soft skills with circular progress charts */}
         <div ref={skillsRef} className="skills__soft">
           <h3 className="skills__subtitle text-xl font-semibold mb-8 text-gray-800 dark:text-gray-200 text-center">
             Soft Skills
@@ -151,7 +146,6 @@ const Skills = () => {
                 className="skills__soft-item flex flex-col items-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
                 <div className="skills__soft-chart relative w-24 h-24 mb-4">
-                  {/* Background circle */}
                   <svg className="skills__soft-circle w-full h-full" viewBox="0 0 100 100">
                     <circle 
                       className="skills__soft-circle-bg text-gray-200 dark:text-gray-700 stroke-current" 
@@ -199,4 +193,4 @@ const Skills = () => {
   );
 };
 
-export default Skills; 
+export default Skills;

@@ -1,10 +1,8 @@
 /**
- * SectionTitle Component
- * Provides a consistent style for section titles
- * Following BEM methodology for classes
+ * Renders a section title with optional subtitle and highlighted text
+ * Uses BEM classes for consistent styling
  */
 const SectionTitle = ({ title, subtitle, highlight, className = '' }) => {
-  // Splits the title to highlight the specified part
   const renderTitle = () => {
     if (!highlight) return title;
     
@@ -33,4 +31,4 @@ const SectionTitle = ({ title, subtitle, highlight, className = '' }) => {
   );
 };
 
-export default SectionTitle; 
+export default SectionTitle;

@@ -1,14 +1,14 @@
 /**
- * Utilidades para animaciones
- * Funciones para manejar animaciones en los componentes
+ * Animation utilities
+ * Functions to handle animations in components
  */
 
 /**
- * Configura un observador de intersección para animar elementos cuando entran en el viewport
- * @param {Array} elements - Elementos a animar
- * @param {Object} options - Opciones para el observador
- * @param {Function} callback - Función a ejecutar cuando un elemento es visible
- * @returns {IntersectionObserver} - El observador creado
+ * Sets up an intersection observer to animate elements when they enter the viewport
+ * @param {Array} elements - Elements to animate
+ * @param {Object} options - Observer options
+ * @param {Function} callback - Function to execute when element is visible
+ * @returns {IntersectionObserver} - The created observer
  */
 export const setupIntersectionObserver = (elements, options = {}, callback) => {
   const defaultOptions = {
@@ -24,7 +24,7 @@ export const setupIntersectionObserver = (elements, options = {}, callback) => {
         if (callback) {
           callback(entry.target);
         } else {
-          // Comportamiento por defecto: añadir clase de animación
+          // Default behavior: add animation class
           entry.target.classList.add('animate-fade-in');
           entry.target.style.opacity = '1';
         }
@@ -33,13 +33,11 @@ export const setupIntersectionObserver = (elements, options = {}, callback) => {
     });
   }, defaultOptions);
 
-  // Si elements es un array, observar cada elemento
   if (Array.isArray(elements)) {
     elements.forEach(element => {
       if (element) observer.observe(element);
     });
   } 
-  // Si elements es un solo elemento, observarlo
   else if (elements) {
     observer.observe(elements);
   }
@@ -48,11 +46,11 @@ export const setupIntersectionObserver = (elements, options = {}, callback) => {
 };
 
 /**
- * Anima elementos con un retraso escalonado
- * @param {HTMLElement} container - Contenedor de los elementos a animar
- * @param {string} selector - Selector CSS para encontrar los elementos
- * @param {string} animationClass - Clase CSS de animación a añadir
- * @param {number} delay - Retraso entre animaciones en ms
+ * Animates elements with a staggered delay
+ * @param {HTMLElement} container - Container of elements to animate
+ * @param {string} selector - CSS selector to find elements
+ * @param {string} animationClass - CSS animation class to add
+ * @param {number} delay - Delay between animations in ms
  */
 export const animateElementsWithDelay = (container, selector, animationClass, delay = 150) => {
   if (!container) return;
@@ -67,10 +65,10 @@ export const animateElementsWithDelay = (container, selector, animationClass, de
 };
 
 /**
- * Anima elementos inmediatamente al cargar la página
- * @param {Array} elements - Elementos a animar
- * @param {string} animationClass - Clase CSS de animación a añadir
- * @param {number} delay - Retraso antes de la animación en ms
+ * Animates elements immediately on page load
+ * @param {Array} elements - Elements to animate
+ * @param {string} animationClass - CSS animation class to add
+ * @param {number} delay - Delay before animation in ms
  */
 export const animateOnLoad = (elements, animationClass, delay = 0) => {
   if (Array.isArray(elements)) {

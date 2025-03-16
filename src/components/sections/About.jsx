@@ -5,21 +5,16 @@ import { setupIntersectionObserver } from '../../utils/animations';
 
 /**
  * About Component
- * "About me" section of the portfolio
- * Following BEM methodology for classes
+ * Displays personal information and professional background
  */
 const About = () => {
   const sectionRef = useRef(null);
   
-  // Effect for scroll animations
   useEffect(() => {
     if (sectionRef.current) {
-      // Make sure the element starts with opacity 0
       sectionRef.current.style.opacity = '0';
       
-      // Set up the intersection observer
       const observer = setupIntersectionObserver(sectionRef.current, { threshold: 0.1 }, (target) => {
-        // Custom callback when element is visible
         target.classList.add('animate-fade-in');
         target.style.opacity = '1';
       });
@@ -35,20 +30,18 @@ const About = () => {
   return (
     <section id="about" className="about py-20 bg-gray-50 dark:bg-gray-900">
       <div className="about__container container mx-auto px-4 md:px-6">
-        {/* Section header */}
         <SectionTitle 
           title="About Me" 
           highlight="Me"
           subtitle="Web developer passionate about creating exceptional digital experiences"
         />
         
-        {/* Main content */}
         <div 
           ref={sectionRef}
           className="about__content grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
           style={{ opacity: 0, transition: 'opacity 0.5s ease-in-out' }}
         >
-          {/* Image */}
+          {/* Profile Image Section */}
           <div className="about__image-container relative">
             <div className="about__image-decoration absolute -top-6 -left-6 w-full h-full border-2 border-primary dark:border-primary-light rounded-lg"></div>
             <div className="about__image relative z-10 rounded-lg overflow-hidden shadow-xl">
@@ -59,11 +52,10 @@ const About = () => {
               />
             </div>
             
-            {/* Decorative elements */}
             <div className="about__decoration-1 absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-full blur-lg"></div>
           </div>
           
-          {/* Text */}
+          {/* Bio and Information Section */}
           <div className="about__text">
             <h3 className="about__name text-2xl font-bold mb-4 text-gray-900 dark:text-white">
               Jaime García-Page Marchante
@@ -81,7 +73,7 @@ const About = () => {
               </p>
             </div>
             
-            {/* Personal information */}
+            {/* Personal Details Card */}
             <div className="about__info-container bg-white dark:bg-gray-800 rounded-lg shadow-md p-5 mb-8">
               <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
                 <svg className="w-5 h-5 mr-2 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,7 +83,6 @@ const About = () => {
               </h4>
               
               <div className="about__info space-y-4">
-                {/* Row 1 */}
                 <div className="about__info-row flex flex-col sm:flex-row sm:space-x-4">
                   <div className="about__info-item flex items-center mb-3 sm:mb-0 sm:flex-1">
                     <div className="about__info-icon-wrapper mr-3 p-1.5 bg-gray-100 dark:bg-gray-700 rounded-full">
@@ -126,7 +117,6 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Row 2 */}
                 <div className="about__info-row flex flex-col sm:flex-row sm:space-x-4">
                   <div className="about__info-item flex items-center mb-3 sm:mb-0 sm:flex-1">
                     <div className="about__info-icon-wrapper mr-3 p-1.5 bg-gray-100 dark:bg-gray-700 rounded-full">
@@ -161,7 +151,6 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Row 3 */}
                 <div className="about__info-row flex flex-col sm:flex-row sm:space-x-4">
                   <div className="about__info-item flex items-center mb-3 sm:mb-0 sm:flex-1">
                     <div className="about__info-icon-wrapper mr-3 p-1.5 bg-gray-100 dark:bg-gray-700 rounded-full">
@@ -198,7 +187,7 @@ const About = () => {
               </div>
             </div>
             
-            {/* Action buttons */}
+            {/* Call-to-action Buttons */}
             <div className="about__actions flex flex-wrap gap-4">
               <a 
                 href="docs/Curriculum Jaime.pdf" 
@@ -224,4 +213,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

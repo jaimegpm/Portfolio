@@ -72,21 +72,19 @@ const Contact = () => {
     setIsSubmitting(true);
     setErrorMessage('');
     
-    // EmailJS service configuration
-    // IMPORTANTE: Reemplaza estos valores con tus propias credenciales de EmailJS
-    // Puedes obtener estas credenciales registrándote en https://www.emailjs.com/
+    // EmailJS configuration
     const serviceId = EMAILJS_CONFIG.serviceId;
     const templateId = EMAILJS_CONFIG.templateId;
     const publicKey = EMAILJS_CONFIG.publicKey;
     
-    // Enviar el correo electrónico usando EmailJS
+    // Send email using EmailJS
     emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
       .then((result) => {
         console.log('Email sent successfully:', result.text);
         setIsSubmitting(false);
         setSubmitStatus('success');
         
-        // Limpiar el formulario después del envío exitoso
+        // Clear form after successful submission
         setFormData({
           name: '',
           email: '',
@@ -94,7 +92,7 @@ const Contact = () => {
           message: '',
         });
         
-        // Resetear el estado después de 5 segundos
+        // Reset status after 5 seconds
         setTimeout(() => {
           setSubmitStatus(null);
         }, 5000);
@@ -105,7 +103,7 @@ const Contact = () => {
         setSubmitStatus('error');
         setErrorMessage('There was an error sending your message. Please try again later.');
         
-        // Resetear el estado de error después de 5 segundos
+        // Reset error state after 5 seconds
         setTimeout(() => {
           setSubmitStatus(null);
           setErrorMessage('');
@@ -344,4 +342,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

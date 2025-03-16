@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 
 /**
  * Header Component
- * Implements the main navigation of the portfolio
- * Following BEM methodology for classes
+ * Main navigation component for the portfolio website
  */
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -11,12 +10,11 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Detect scroll to change header styles and active section
+  // Handle scroll events and initialize dark mode preference
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
-      // Detect active section
       const sections = ['home', 'about', 'skills', 'projects', 'contact'];
       const scrollPosition = window.scrollY + 100;
       
@@ -36,7 +34,6 @@ const Header = () => {
     
     window.addEventListener('scroll', handleScroll);
     
-    // Check if user prefers dark mode
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const savedTheme = localStorage.getItem('theme');
     
@@ -50,7 +47,6 @@ const Header = () => {
     };
   }, []);
 
-  // Toggle between light and dark mode
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
     if (isDarkMode) {
@@ -62,35 +58,30 @@ const Header = () => {
     }
   };
 
-  // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Close mobile menu when clicking a link
+  // Handle smooth scrolling and mobile menu state
   const handleNavLinkClick = (e) => {
     e.preventDefault();
     const targetId = e.currentTarget.getAttribute('href').substring(1);
     const targetElement = document.getElementById(targetId);
     
     if (targetElement) {
-      // Smooth scroll to section
       window.scrollTo({
-        top: targetElement.offsetTop - 80, // Adjustment for fixed header
+        top: targetElement.offsetTop - 80,
         behavior: 'smooth'
       });
       
-      // Update active section
       setActiveSection(targetId);
       
-      // Close mobile menu if open
       if (isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
     }
   };
 
-  // Navigation items
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
@@ -211,4 +202,4 @@ const Header = () => {
   );
 };
 
-export default Header; 
+export default Header;

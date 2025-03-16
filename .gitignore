@@ -7,13 +7,13 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Dependencias
+# Dependencies
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# IDE and Editor files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -24,46 +24,42 @@ dist-ssr
 *.sln
 *.sw?
 
-# Archivos de entorno y configuración
+# Environment and Configuration files
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# Archivos de configuración con información sensible
-# Nota: Para producción, considera usar variables de entorno en lugar de archivos de configuración
+# Sensitive Configuration files
+# Note: For production, use environment variables instead of configuration files
 /src/config/emailjs.js
 
-# Archivos de caché
 .cache/
 .parcel-cache/
 
-# Archivos de cobertura
 coverage/
 
-# Archivos de construcción
 /build/
 /.netlify/
 
-# Archivos temporales
 .temp
 .tmp
 
-# Archivos específicos de macOS
+# macOS specific files
 .DS_Store
 .AppleDouble
 .LSOverride
 Icon
 ._*
 
-# Archivos específicos de Windows
+# Windows specific files
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Archivos específicos de Linux
+# Linux specific files
 *~
 .directory
 .Trash-*

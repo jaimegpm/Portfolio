@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Base URL para GitHub Pages - Usando el nombre exacto del repositorio (sensible a mayúsculas/minúsculas)
+  // Base URL for GitHub Pages - Using exact repository name (case sensitive)
   base: '/Portfolio/',
   plugins: [react()],
 })

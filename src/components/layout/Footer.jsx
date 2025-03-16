@@ -1,7 +1,6 @@
 /**
  * Footer Component
- * Implements the footer of the portfolio
- * Following BEM methodology for classes
+ * Main footer section of the portfolio website
  */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +9,7 @@ const Footer = () => {
     <footer className="footer bg-gray-100 dark:bg-gray-900 py-12">
       <div className="footer__container container mx-auto px-4 md:px-6">
         <div className="footer__content grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Column 1: Logo and information */}
+          {/* Brand section with logo and social links */}
           <div className="footer__brand">
             <a href="#home" className="footer__logo text-2xl font-bold text-primary-dark dark:text-primary-light mb-4 inline-block">
               Jaime García-Page<span className="text-accent">.</span>
@@ -40,7 +39,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Column 2: Quick links */}
+          {/* Navigation links section */}
           <div className="footer__links">
             <h3 className="footer__heading text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Quick Links
@@ -59,7 +58,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Contact information section */}
           <div className="footer__contact">
             <h3 className="footer__heading text-lg font-semibold text-gray-900 dark:text-white mb-4">
               Contact
@@ -88,7 +87,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
+        {/* Copyright section */}
         <div className="footer__bottom mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
           <p className="footer__copyright text-gray-600 dark:text-gray-400">
             © {currentYear} Jaime García-Page. All rights reserved.
@@ -99,4 +98,4 @@ const Footer = () => {
   );
 };
 
-export default Footer; 
+export default Footer;
