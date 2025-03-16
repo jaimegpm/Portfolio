@@ -59,13 +59,7 @@ A modern and responsive personal portfolio showcasing my skills, projects, and e
 ```bash
 npm run deploy
 ```
-
-## 📞 Contact
-
-Jaime García-Page - [garciapagemajaime@gmail.com](mailto:garciapagemajaime@gmail.com)
-
 ---
-
 <div align="center">
   
 [![GitHub](https://img.shields.io/badge/GitHub-jaimegpm-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jaimegpm)
