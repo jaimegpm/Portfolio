@@ -201,9 +201,8 @@ const About = () => {
             {/* Action buttons */}
             <div className="about__actions flex flex-wrap gap-4">
               <a 
-                href="/cv.pdf" 
-                target="_blank" 
-                rel="noopener noreferrer"
+                href="/docs/Curriculum Jaime.pdf" 
+                download="Curriculum_Jaime_Garcia-Page.pdf"
                 className="about__button about__button--cv px-6 py-3 bg-primary hover:bg-primary-dark text-white hover:text-white dark:text-white dark:hover:text-white font-medium rounded-md transition-colors shadow-md hover:shadow-lg flex items-center"
               >
                 <svg className="w-5 h-5 mr-2 text-white dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

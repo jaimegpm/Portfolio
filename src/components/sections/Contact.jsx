@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import SectionTitle from '../ui/SectionTitle';
 import { setupIntersectionObserver, animateElementsWithDelay } from '../../utils/animations';
+import { EMAILJS_CONFIG } from '../../config/emailjs';
 
 /**
  * Contact Component
@@ -16,6 +18,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const formRef = useRef(null);
   const sectionRef = useRef(null);
   
@@ -67,23 +70,47 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+    // EmailJS service configuration
+    // IMPORTANTE: Reemplaza estos valores con tus propias credenciales de EmailJS
+    // Puedes obtener estas credenciales registrándote en https://www.emailjs.com/
+    const serviceId = EMAILJS_CONFIG.serviceId;
+    const templateId = EMAILJS_CONFIG.templateId;
+    const publicKey = EMAILJS_CONFIG.publicKey;
+    
+    // Enviar el correo electrónico usando EmailJS
+    emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
+      .then((result) => {
+        console.log('Email sent successfully:', result.text);
+        setIsSubmitting(false);
+        setSubmitStatus('success');
+        
+        // Limpiar el formulario después del envío exitoso
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: '',
+        });
+        
+        // Resetear el estado después de 5 segundos
+        setTimeout(() => {
+          setSubmitStatus(null);
+        }, 5000);
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error);
+        setIsSubmitting(false);
+        setSubmitStatus('error');
+        setErrorMessage('There was an error sending your message. Please try again later.');
+        
+        // Resetear el estado de error después de 5 segundos
+        setTimeout(() => {
+          setSubmitStatus(null);
+          setErrorMessage('');
+        }, 5000);
       });
-      
-      // Reset status after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
-    }, 1500);
   };
   
   // Contact information data
@@ -294,6 +321,18 @@ const Contact = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <span>Your message has been sent successfully. I'll get back to you soon!</span>
+                  </div>
+                </div>
+              )}
+              
+              {/* Error message */}
+              {submitStatus === 'error' && (
+                <div className="contact__form-error bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 rounded-md p-4 mt-4 animate-fade-in">
+                  <div className="flex">
+                    <svg className="w-5 h-5 text-red-500 dark:text-red-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>{errorMessage || 'There was an error sending your message. Please try again later.'}</span>
                   </div>
                 </div>
               )}
