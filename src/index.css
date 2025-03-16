@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados usando BEM */
+:root {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Variables de color para modo claro/oscuro */
+  --color-primary: #2563EB;
+  --color-primary-light: #3B82F6;
+  --color-primary-dark: #1D4ED8;
+  --color-secondary: #7C3AED;
+  --color-accent: #D97706;
+  --color-background: #F9FAFB;
+  --color-background-dark: #111827;
+  --color-text: #111827;
+  --color-text-dark: #F9FAFB;
+
+  /* Configuración de suavizado de fuentes */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos base */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dark body {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
+}
+
+/* Contenedor principal */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Estilos para secciones */
+section {
+  padding: 5rem 0;
+  width: 100%;
+}
+
+/* Transiciones globales */
+a, button {
+  transition: all 0.3s ease;
+}
+
+/* Estilos para imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Estilos para enlaces */
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+.dark a {
+  color: var(--color-primary-light);
+}
+
+.dark a:hover {
+  color: var(--color-primary);
+}
+
+/* Estilos para botones */
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Utilidades de animación personalizadas */
+@layer utilities {
+  .transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .transition-colors {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+  
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+}
