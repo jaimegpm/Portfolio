@@ -106,6 +106,144 @@ button {
   font-family: inherit;
 }
 
+/* Estilos para la animación de desplazamiento de tecnologías */
+.skills__tech-scroll {
+  position: relative;
+}
+
+.skills__tech-scroll::before,
+.skills__tech-scroll::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 15%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.skills__tech-scroll::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-background) 0%, transparent 100%);
+}
+
+.skills__tech-scroll::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-background) 0%, transparent 100%);
+}
+
+.dark .skills__tech-scroll::before {
+  background: linear-gradient(to right, var(--color-background-dark) 0%, transparent 100%);
+}
+
+.dark .skills__tech-scroll::after {
+  background: linear-gradient(to left, var(--color-background-dark) 0%, transparent 100%);
+}
+
+.skills__marquee {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  /* Añadir máscara de desvanecimiento */
+  mask-image: linear-gradient(
+    to right, 
+    transparent, 
+    black 5%, 
+    black 95%, 
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right, 
+    transparent, 
+    black 5%, 
+    black 95%, 
+    transparent
+  );
+}
+
+.skills__marquee-track {
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Pausa la animación al pasar el ratón */
+.skills__marquee:hover .skills__marquee-track {
+  animation-play-state: paused;
+}
+
+/* Ajusta el tamaño de los iconos y el espaciado */
+.skills__tech-icon-wrapper {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #1e293b;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.skills__tech-icon-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.skills__tech-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  filter: brightness(1.2);
+}
+
+.skills__tech-name {
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* Ajustes para el modo claro */
+:root:not(.dark) .skills__tech-icon-wrapper {
+  background-color: #f1f5f9;
+}
+
+:root:not(.dark) .skills__tech-icon {
+  filter: none;
+}
+
+:root:not(.dark) .skills__tech-name {
+  color: #64748b;
+}
+
+/* Animaciones personalizadas para el desplazamiento continuo */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(calc(-100% / 3));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-scroll-left {
+  animation: scrollLeft linear infinite;
+}
+
+.animate-scroll-right {
+  animation: scrollRight linear infinite;
+}
+
 /* Utilidades de animación personalizadas */
 @layer utilities {
   .transition-transform {
