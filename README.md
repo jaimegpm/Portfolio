@@ -78,14 +78,23 @@ Un portfolio profesional moderno y responsive construido con React, Vite y Tailw
    }
    ```
 
-3. Para desplegar en GitHub Pages, simplemente ejecuta:
+3. **Importante**: Todas las rutas a archivos estáticos (imágenes, documentos, etc.) deben ser relativas (sin barra inicial `/`):
+   ```javascript
+   // Correcto (ruta relativa)
+   avatar1: "images/avatars/AvatarHero.webp",
+   
+   // Incorrecto (ruta absoluta)
+   avatar1: "/images/avatars/AvatarHero.webp",
+   ```
+
+4. Para desplegar en GitHub Pages, simplemente ejecuta:
    ```bash
    npm run deploy
    # o
    yarn deploy
    ```
 
-4. Después del despliegue, ve a la configuración de tu repositorio en GitHub:
+5. Después del despliegue, ve a la configuración de tu repositorio en GitHub:
    - Navega a Settings > Pages
    - Asegúrate de que la fuente está configurada en "gh-pages branch"
 

@@ -6,9 +6,9 @@
 // Imágenes de perfil para la sección Hero
 export const profileImages = {
   // Avatar personalizado
-  avatar1: "/images/avatars/AvatarHero.webp",
-  avatar2: "/images/avatars/AvatarHero.webp",
-  avatar3: "/images/avatars/AvatarHero.webp",
+  avatar1: "images/avatars/AvatarHero.webp",
+  avatar2: "images/avatars/AvatarHero.webp",
+  avatar3: "images/avatars/AvatarHero.webp",
   // Avatar femenino
   avatarFemale1: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60",
   avatarFemale2: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&auto=format&fit=crop&q=60",
@@ -19,9 +19,9 @@ export const profileImages = {
 // Imágenes para la sección About
 export const aboutImages = {
   // Imagen de avatar personalizada para About
-  developer1: "/images/avatars/AboutMe.webp",
-  developer2: "/images/avatars/AboutMe.webp",
-  developer3: "/images/avatars/AboutMe.webp",
+  developer1: "images/avatars/AboutMe.webp",
+  developer2: "images/avatars/AboutMe.webp",
+  developer3: "images/avatars/AboutMe.webp",
   // Imagen por defecto
   aboutDefault: "https://via.placeholder.com/600x800?text=About+Image",
 };
