@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import SectionTitle from '../ui/SectionTitle';
 import { projectImages } from '../../data/placeholderImages';
 import { setupIntersectionObserver, animateElementsWithDelay } from '../../utils/animations';
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Projects section component displaying portfolio work with filtering and animations
@@ -10,6 +11,7 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [visibleProjects, setVisibleProjects] = useState([]);
   const projectsRef = useRef(null);
+  const { t } = useLanguage();
   
   // Project data array
   const projects = [
@@ -102,9 +104,9 @@ const Projects = () => {
     <section id="projects" className="projects py-20 bg-gray-50 dark:bg-gray-900">
       <div className="projects__container container mx-auto px-4 md:px-6">
         <SectionTitle 
-          title="My Projects" 
-          highlight="Projects"
-          subtitle="A selection of my recent work and academic projects"
+          title={t('projects.title')} 
+          highlight={t('projects.highlight')}
+          subtitle={t('projects.subtitle')}
         />
         
         {/* Category filter buttons */}
@@ -162,6 +164,7 @@ const Projects = () => {
                   </p>
                   
                   <div className="projects__item-technologies flex flex-wrap gap-2 mb-6 transform translate-y-4 opacity-0 transition-all duration-300 delay-150 group-hover:translate-y-0 group-hover:opacity-100">
+                    <span className="text-white text-sm font-medium mr-1">{t('projects.technologies')}:</span>
                     {project.technologies.map((tech, index) => (
                       <span 
                         key={index} 
@@ -185,7 +188,7 @@ const Projects = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
-                        Live Demo
+                        {t('projects.viewLive')}
                       </a>
                     )}
                     <a 
@@ -198,7 +201,7 @@ const Projects = () => {
                       <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                       </svg>
-                      View Code
+                      {t('projects.viewCode')}
                     </a>
                   </div>
                 </div>
@@ -215,7 +218,7 @@ const Projects = () => {
             rel="noopener noreferrer"
             className="projects__more-btn inline-flex items-center px-8 py-3.5 bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-secondary-dark text-white hover:text-white dark:text-white dark:hover:text-white font-medium rounded-md transition-colors shadow-md hover:shadow-lg"
           >
-            View More Projects
+            {t('projects.viewMore')}
             <svg className="w-5 h-5 ml-2 text-white dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>

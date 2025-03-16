@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import SectionTitle from '../ui/SectionTitle';
 import { setupIntersectionObserver, animateElementsWithDelay } from '../../utils/animations';
 import { EMAILJS_CONFIG, TEMPLATE_PARAMS } from '../../config/emailjs';
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Contact Component
@@ -20,6 +21,7 @@ const Contact = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const formRef = useRef(null);
   const sectionRef = useRef(null);
+  const { t } = useLanguage();
   
   // Effect for scroll animations
   useEffect(() => {
@@ -112,7 +114,7 @@ const Contact = () => {
         console.error('Error sending email:', error);
         setIsSubmitting(false);
         setSubmitStatus('error');
-        setErrorMessage('There was an error sending your message. Please try again later.');
+        setErrorMessage(t('contact.errorMessage'));
         
         // Reset error state after 5 seconds
         setTimeout(() => {
@@ -126,7 +128,7 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
-      title: 'Email',
+      title: t('contact.emailLabel'),
       value: 'garciapagemajaime@gmail.com',
       link: 'mailto:garciapagemajaime@gmail.com',
     },
@@ -138,7 +140,7 @@ const Contact = () => {
     },
     {
       icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z',
-      title: 'Location',
+      title: t('contact.locationLabel'),
       value: 'Spain',
       link: 'https://maps.google.com/?q=Spain',
     },
@@ -148,9 +150,9 @@ const Contact = () => {
     <section id="contact" ref={sectionRef} className="contact py-20 bg-white dark:bg-background-dark">
       <div className="contact__container container mx-auto px-4 md:px-6">
         <SectionTitle 
-          title="Get In Touch" 
-          highlight="Touch"
-          subtitle="Have a project in mind or just want to say hello? Feel free to reach out!"
+          title={t('contact.title')} 
+          highlight={t('contact.highlight')}
+          subtitle={t('contact.subtitle')}
         />
         
         <div className="contact__content grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
@@ -158,10 +160,10 @@ const Contact = () => {
           <div className="contact__info space-y-8">
             <div className="contact__intro">
               <h3 className="contact__intro-title text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-                Let's Connect
+                {t('contact.connect')}
               </h3>
               <p className="contact__intro-text text-gray-700 dark:text-gray-300">
-                I'm currently looking for new opportunities and would love to hear about your project. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                {t('contact.description')}
               </p>
             </div>
             
@@ -198,7 +200,7 @@ const Contact = () => {
             {/* Social Links */}
             <div className="contact__social">
               <h4 className="contact__social-title text-lg font-semibold text-gray-900 dark:text-white mb-4">
-                Find me on
+                {t('contact.findMe')}
               </h4>
               <div className="contact__social-links flex space-x-4">
                 {[
@@ -225,14 +227,14 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="contact__form-container bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 opacity-0 transition-all duration-500">
             <h3 className="contact__form-title text-2xl font-bold mb-6 text-gray-900 dark:text-white">
-              Send me a message
+              {t('contact.formTitle')}
             </h3>
             
             <form ref={formRef} onSubmit={handleSubmit} className="contact__form space-y-6">
               {/* Form fields */}
               <div className="contact__form-group">
                 <label htmlFor="name" className="contact__form-label block text-gray-700 dark:text-gray-300 mb-2">
-                  Full name <span className="text-red-500">*</span>
+                  {t('contact.nameLabel')} <span className="text-red-500">*</span>
                 </label>
                 <input 
                   type="text" 
@@ -242,13 +244,13 @@ const Contact = () => {
                   onChange={handleChange} 
                   required
                   className="contact__form-input w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-light transition-all duration-300"
-                  placeholder="Your name"
+                  placeholder={t('contact.nameLabel')}
                 />
               </div>
               
               <div className="contact__form-group">
                 <label htmlFor="email" className="contact__form-label block text-gray-700 dark:text-gray-300 mb-2">
-                  Email <span className="text-red-500">*</span>
+                  {t('contact.emailLabel')} <span className="text-red-500">*</span>
                 </label>
                 <input 
                   type="email" 
@@ -258,29 +260,28 @@ const Contact = () => {
                   onChange={handleChange} 
                   required
                   className="contact__form-input w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-light transition-all duration-300"
-                  placeholder="your.email@example.com"
+                  placeholder="email@example.com"
                 />
               </div>
               
               <div className="contact__form-group">
                 <label htmlFor="subject" className="contact__form-label block text-gray-700 dark:text-gray-300 mb-2">
-                  Subject <span className="text-red-500">*</span>
+                  {t('contact.subjectLabel')}
                 </label>
                 <input 
                   type="text" 
                   id="subject" 
                   name="subject" 
                   value={formData.subject} 
-                  onChange={handleChange} 
-                  required
+                  onChange={handleChange}
                   className="contact__form-input w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-light transition-all duration-300"
-                  placeholder="Message subject"
+                  placeholder={t('contact.subjectLabel')}
                 />
               </div>
               
               <div className="contact__form-group">
                 <label htmlFor="message" className="contact__form-label block text-gray-700 dark:text-gray-300 mb-2">
-                  Message <span className="text-red-500">*</span>
+                  {t('contact.messageLabel')} <span className="text-red-500">*</span>
                 </label>
                 <textarea 
                   id="message" 
@@ -290,15 +291,16 @@ const Contact = () => {
                   required
                   rows="5"
                   className="contact__form-textarea w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-primary-light transition-all duration-300 resize-none"
-                  placeholder="Your message here..."
+                  placeholder={t('contact.messageLabel')}
                 ></textarea>
               </div>
               
+              {/* Submit button */}
               <div className="contact__form-submit">
                 <button 
                   type="submit" 
-                  className="contact__form-button w-full py-3 px-6 bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-secondary-dark text-white font-medium rounded-md transition-colors shadow-md hover:shadow-lg flex items-center justify-center"
                   disabled={isSubmitting}
+                  className="contact__form-button w-full py-3 px-6 bg-gradient-to-r from-primary to-secondary hover:from-primary-dark hover:to-secondary-dark text-white font-medium rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center"
                 >
                   {isSubmitting ? (
                     <>
@@ -306,40 +308,24 @@ const Contact = () => {
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
-                      Sending...
+                      {t('contact.sending')}
                     </>
                   ) : (
-                    <>
-                      Send Message
-                      <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </>
+                    t('contact.sendButton')
                   )}
                 </button>
               </div>
               
-              {/* Success message */}
+              {/* Success/Error messages */}
               {submitStatus === 'success' && (
-                <div className="contact__form-success bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 rounded-md p-4 mt-4 animate-fade-in">
-                  <div className="flex">
-                    <svg className="w-5 h-5 text-green-500 dark:text-green-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Your message has been sent successfully. I'll get back to you soon!</span>
-                  </div>
+                <div className="contact__form-success bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 p-4 rounded-md">
+                  {t('contact.successMessage')}
                 </div>
               )}
               
-              {/* Error message */}
               {submitStatus === 'error' && (
-                <div className="contact__form-error bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-200 rounded-md p-4 mt-4 animate-fade-in">
-                  <div className="flex">
-                    <svg className="w-5 h-5 text-red-500 dark:text-red-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{errorMessage || 'There was an error sending your message. Please try again later.'}</span>
-                  </div>
+                <div className="contact__form-error bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 p-4 rounded-md">
+                  {errorMessage}
                 </div>
               )}
             </form>

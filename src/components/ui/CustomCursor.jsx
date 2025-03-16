@@ -13,12 +13,14 @@ const CustomCursor = () => {
   // Use refs to avoid unnecessary re-renders
   const positionRef = useRef({ x: 0, y: 0 });
   const requestRef = useRef();
-  const previousTimeRef = useRef();
 
   // Update cursor position
   const updateCursorPosition = () => {
     if (cursorRef.current) {
-      cursorRef.current.style.transform = `translate(${positionRef.current.x}px, ${positionRef.current.y}px) scale(${clicked ? 0.7 : 1})`;
+      // Apply the transform with the cursor exactly at the mouse position
+      cursorRef.current.style.left = `${positionRef.current.x}px`;
+      cursorRef.current.style.top = `${positionRef.current.y}px`;
+      cursorRef.current.style.transform = `translate(-50%, -50%) scale(${clicked ? 0.7 : 1})`;
     }
     requestRef.current = requestAnimationFrame(updateCursorPosition);
   };

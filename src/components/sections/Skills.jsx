@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import SectionTitle from '../ui/SectionTitle';
 import { setupIntersectionObserver } from '../../utils/animations';
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Skills Component
@@ -8,6 +9,7 @@ import { setupIntersectionObserver } from '../../utils/animations';
  */
 const Skills = () => {
   const skillsRef = useRef(null);
+  const { t } = useLanguage();
   
   useEffect(() => {
     if (skillsRef.current) {
@@ -62,12 +64,12 @@ const Skills = () => {
   ];
   
   const softSkills = [
-    { name: 'Communication', value: 85 },
-    { name: 'Teamwork', value: 90 },
-    { name: 'Problem Solving', value: 85 },
-    { name: 'Adaptability', value: 90 },
-    { name: 'Time Management', value: 80 },
-    { name: 'Creativity', value: 85 },
+    { name: t('skills.softSkills.communication'), value: 85 },
+    { name: t('skills.softSkills.teamwork'), value: 90 },
+    { name: t('skills.softSkills.problemSolving'), value: 85 },
+    { name: t('skills.softSkills.adaptability'), value: 90 },
+    { name: t('skills.softSkills.timeManagement'), value: 80 },
+    { name: t('skills.softSkills.creativity'), value: 85 },
   ];
   
   /**
@@ -81,14 +83,14 @@ const Skills = () => {
     <section id="skills" className="skills py-20 bg-white dark:bg-background-dark overflow-hidden">
       <div className="skills__container container mx-auto px-4 md:px-6">
         <SectionTitle 
-          title="My Skills" 
-          highlight="Skills"
-          subtitle="Technologies and tools I work with"
+          title={t('skills.title')} 
+          highlight={t('skills.highlight')}
+          subtitle={t('skills.subtitle')}
         />
         
         <div className="skills__tech-scroll mb-12">
           <h3 className="skills__subtitle text-xl font-semibold mb-6 text-gray-800 dark:text-gray-200 text-center">
-            Technical Skills
+            {t('skills.technical')}
           </h3>
           
           {/* Frontend skills - Normal speed */}
@@ -137,7 +139,7 @@ const Skills = () => {
         {/* Soft skills with circular progress charts */}
         <div ref={skillsRef} className="skills__soft">
           <h3 className="skills__subtitle text-xl font-semibold mb-8 text-gray-800 dark:text-gray-200 text-center">
-            Soft Skills
+            {t('skills.soft')}
           </h3>
           <div className="skills__soft-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {softSkills.map((skill, index) => (

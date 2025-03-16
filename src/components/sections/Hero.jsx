@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { profileImages } from '../../data/placeholderImages';
 import { animateOnLoad } from '../../utils/animations';
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Main hero section component with animations
@@ -12,9 +13,11 @@ const Hero = () => {
   const imageRef = useRef(null);
   const scrollIndicatorRef = useRef(null);
   const [hideScrollIndicator, setHideScrollIndicator] = useState(false);
+  const { t } = useLanguage();
 
-  // Handle initial load animations
+  // Handle initial animations
   useEffect(() => {
+    // Initially hide elements
     const elements = [titleRef.current, subtitleRef.current, ctaRef.current, imageRef.current];
     elements.forEach(el => {
       if (el) {
@@ -22,6 +25,7 @@ const Hero = () => {
       }
     });
 
+    // Animate elements with delays
     const timer = setTimeout(() => {
       animateOnLoad(titleRef.current, 'animate-slide-up');
       
@@ -41,9 +45,10 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Control scroll indicator visibility based on scroll position
+  // Handle scroll indicator visibility
   useEffect(() => {
     const handleScroll = () => {
+      // Hide scroll indicator when user scrolls down (past ~10% of viewport height)
       if (window.scrollY > window.innerHeight * 0.1) {
         setHideScrollIndicator(true);
       } else {
@@ -62,14 +67,14 @@ const Hero = () => {
     <section id="home" className="hero min-h-screen flex items-center bg-gradient-to-b from-white to-gray-50 dark:from-background-dark dark:to-gray-900 overflow-hidden">
       <div className="hero__container container mx-auto px-4 md:px-6">
         <div className="hero__content grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          {/* Main content section */}
+          {/* Main content */}
           <div className="hero__text order-2 md:order-1">
             <h1 
               ref={titleRef}
               className="hero__title text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
               style={{ opacity: 0 }}
             >
-              <span className="block text-gray-900 dark:text-white">Hello, I'm</span>
+              <span className="block text-gray-900 dark:text-white">{t('hero.greeting')}</span>
               <span className="hero__name bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Jaime García-Page</span>
             </h1>
             <h2 
@@ -77,8 +82,8 @@ const Hero = () => {
               className="hero__subtitle text-xl md:text-2xl text-gray-600 dark:text-gray-400 mb-8"
               style={{ opacity: 0 }}
             >
-              <span className="hero__role block font-medium">Full Stack Web Developer</span>
-              <span className="hero__tagline block mt-2">Creating attractive and functional digital experiences</span>
+              <span className="hero__role block font-medium">{t('hero.role')}</span>
+              <span className="hero__tagline block mt-2">{t('hero.tagline')}</span>
             </h2>
             <div 
               ref={ctaRef}
@@ -89,22 +94,22 @@ const Hero = () => {
                 href="#contact" 
                 className="hero__button hero__button--primary px-8 py-3 bg-primary hover:bg-primary-dark text-white hover:text-white dark:text-white dark:hover:text-white font-medium rounded-md transition-colors shadow-md hover:shadow-lg"
               >
-                Contact Me
+                {t('hero.contactButton')}
               </a>
               <a 
                 href="#projects" 
                 className="hero__button hero__button--secondary px-8 py-3 bg-white dark:bg-gray-800 text-primary dark:text-primary-light border border-primary dark:border-primary-light font-medium rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-md hover:shadow-lg"
               >
-                View Projects
+                {t('hero.projectsButton')}
               </a>
             </div>
             
-            {/* Technology expertise section */}
+            {/* Tech stack stats */}
             <div className="hero__stats grid grid-cols-3 gap-3 sm:gap-6 mt-8 md:mt-12">
               {[
-                { value: 'React', label: 'Frontend' },
-                { value: 'Java', label: 'Backend' },
-                { value: 'Tailwind', label: 'Styling' },
+                { value: 'React', label: t('hero.stats.frontend') },
+                { value: 'Java', label: t('hero.stats.backend') },
+                { value: 'Tailwind', label: t('hero.stats.styling') },
               ].map((stat, index) => (
                 <div 
                   key={index} 
@@ -121,7 +126,7 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Profile image with decorative elements */}
+          {/* Profile image section */}
           <div 
             ref={imageRef}
             className="hero__image-container relative order-1 md:order-2 flex justify-center mb-8 md:mb-0"
@@ -138,12 +143,12 @@ const Hero = () => {
               </div>
             </div>
             
-            {/* Background decorations */}
+            {/* Decorative elements */}
             <div className="hero__decoration-1 absolute top-1/4 -left-4 sm:-left-8 w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 bg-accent/30 rounded-full blur-md animate-pulse"></div>
             <div className="hero__decoration-2 absolute bottom-1/4 -right-4 sm:-right-8 w-10 h-10 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-primary/30 rounded-full blur-md animate-pulse" style={{ animationDelay: '1s' }}></div>
             <div className="hero__decoration-3 absolute -bottom-4 sm:-bottom-8 left-1/3 w-8 h-8 sm:w-14 sm:h-14 md:w-20 md:h-20 bg-secondary/30 rounded-full blur-md animate-pulse" style={{ animationDelay: '2s' }}></div>
             
-            {/* Floating technology icons */}
+            {/* Tech stack icons */}
             <div className="hero__tech hero__tech--1 absolute top-0 right-1/4 p-1.5 sm:p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg animate-bounce-slow">
               <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8" />
             </div>
@@ -157,14 +162,14 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Scroll indicator - Desktop only */}
+      {/* Scroll indicator - Hidden on mobile, visible on md screens and up, disappears on scroll */}
       <div 
         ref={scrollIndicatorRef}
         className={`hero__scroll absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:flex flex-col items-center animate-bounce-slow transition-opacity duration-500 ${
           hideScrollIndicator ? 'opacity-0 pointer-events-none' : 'opacity-100'
         }`}
       >
-        <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">Scroll</span>
+        <span className="text-sm text-gray-500 dark:text-gray-400 mb-2">{t('hero.scroll')}</span>
         <svg className="w-6 h-6 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>

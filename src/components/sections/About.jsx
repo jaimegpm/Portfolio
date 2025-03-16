@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import SectionTitle from '../ui/SectionTitle';
 import { aboutImages } from '../../data/placeholderImages';
 import { setupIntersectionObserver } from '../../utils/animations';
+import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * About Component
@@ -9,6 +10,7 @@ import { setupIntersectionObserver } from '../../utils/animations';
  */
 const About = () => {
   const sectionRef = useRef(null);
+  const { t } = useLanguage();
   
   useEffect(() => {
     if (sectionRef.current) {
@@ -31,9 +33,9 @@ const About = () => {
     <section id="about" className="about py-20 bg-gray-50 dark:bg-gray-900">
       <div className="about__container container mx-auto px-4 md:px-6">
         <SectionTitle 
-          title="About Me" 
-          highlight="Me"
-          subtitle="Web developer passionate about creating exceptional digital experiences"
+          title={t('about.title')} 
+          highlight={t('about.highlight')}
+          subtitle={t('about.subtitle')}
         />
         
         <div 
@@ -58,18 +60,18 @@ const About = () => {
           {/* Bio and Information Section */}
           <div className="about__text">
             <h3 className="about__name text-2xl font-bold mb-4 text-gray-900 dark:text-white">
-              Jaime García-Page Marchante
+              {t('about.name')}
               <span className="about__role block text-lg font-normal bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mt-1">
-                Full Stack Web Developer
+                {t('about.role')}
               </span>
             </h3>
             
             <div className="about__description text-gray-700 dark:text-gray-300 mb-8">
               <p className="mb-4">
-                Recently graduated in Web Application Development, I specialize in creating modern, responsive web applications with clean, maintainable code. My expertise includes React, JavaScript, and modern CSS frameworks like Tailwind.
+                {t('about.description1')}
               </p>
               <p>
-                I'm passionate about delivering exceptional user experiences and ready to apply my skills in a professional environment as I begin my career journey.
+                {t('about.description2')}
               </p>
             </div>
             
@@ -79,7 +81,7 @@ const About = () => {
                 <svg className="w-5 h-5 mr-2 text-primary dark:text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                Personal Information
+                {t('about.personalInfo')}
               </h4>
               
               <div className="about__info space-y-4">
@@ -92,10 +94,10 @@ const About = () => {
                     </div>
                     <div className="overflow-hidden">
                       <span className="about__info-label text-xs font-medium text-gray-500 dark:text-gray-400 block">
-                        Name
+                        {t('about.nameLabel')}
                       </span>
                       <span className="about__info-value text-gray-900 dark:text-white text-sm truncate">
-                        Jaime García-Page Marchante
+                        {t('about.name')}
                       </span>
                     </div>
                   </div>
@@ -108,7 +110,7 @@ const About = () => {
                     </div>
                     <div className="overflow-hidden">
                       <span className="about__info-label text-xs font-medium text-gray-500 dark:text-gray-400 block">
-                        Email
+                        {t('about.emailLabel')}
                       </span>
                       <span className="about__info-value text-gray-900 dark:text-white text-sm truncate">
                         garciapagemajaime@gmail.com
@@ -126,10 +128,10 @@ const About = () => {
                     </div>
                     <div>
                       <span className="about__info-label text-xs font-medium text-gray-500 dark:text-gray-400 block">
-                        Education
+                        {t('about.educationLabel')}
                       </span>
                       <span className="about__info-value text-gray-900 dark:text-white text-sm">
-                        Web Application Development
+                        {t('about.educationValue')}
                       </span>
                     </div>
                   </div>
@@ -142,10 +144,10 @@ const About = () => {
                     </div>
                     <div>
                       <span className="about__info-label text-xs font-medium text-gray-500 dark:text-gray-400 block">
-                        Location
+                        {t('about.locationLabel')}
                       </span>
                       <span className="about__info-value text-gray-900 dark:text-white text-sm">
-                        Spain
+                        {t('about.locationValue')}
                       </span>
                     </div>
                   </div>
@@ -160,10 +162,10 @@ const About = () => {
                     </div>
                     <div>
                       <span className="about__info-label text-xs font-medium text-gray-500 dark:text-gray-400 block">
-                        Availability
+                        {t('about.availabilityLabel')}
                       </span>
                       <span className="about__info-value text-gray-900 dark:text-white text-sm">
-                        Internship / Full-time
+                        {t('about.availabilityValue')}
                       </span>
                     </div>
                   </div>
@@ -176,7 +178,7 @@ const About = () => {
                     </div>
                     <div>
                       <span className="about__info-label text-xs font-medium text-gray-500 dark:text-gray-400 block">
-                        GitHub
+                        {t('about.githubLabel')}
                       </span>
                       <span className="about__info-value text-gray-900 dark:text-white text-sm">
                         github.com/jaimegpm
@@ -197,13 +199,13 @@ const About = () => {
                 <svg className="w-5 h-5 mr-2 text-white dark:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Download CV
+                {t('about.downloadCV')}
               </a>
               <a 
                 href="#contact" 
                 className="about__button about__button--contact px-6 py-3 bg-white dark:bg-gray-800 text-primary dark:text-primary-light border border-primary dark:border-primary-light font-medium rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors shadow-md hover:shadow-lg"
               >
-                Contact Me
+                {t('about.contactMe')}
               </a>
             </div>
           </div>

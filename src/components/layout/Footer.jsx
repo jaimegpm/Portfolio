@@ -1,9 +1,12 @@
+import { useLanguage } from '../../context/LanguageContext';
+
 /**
  * Footer Component
  * Main footer section of the portfolio website
  */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useLanguage();
   
   return (
     <footer className="footer bg-gray-100 dark:bg-gray-900 py-12">
@@ -15,7 +18,7 @@ const Footer = () => {
               Jaime García-Page<span className="text-accent">.</span>
             </a>
             <p className="footer__description text-gray-600 dark:text-gray-400 mt-4 max-w-md">
-              Web developer specializing in creating attractive and functional digital experiences with modern technologies.
+              {t('footer.description')}
             </p>
             <div className="footer__social mt-6 flex space-x-4">
               {[
@@ -42,16 +45,22 @@ const Footer = () => {
           {/* Navigation links section */}
           <div className="footer__links">
             <h3 className="footer__heading text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Quick Links
+              {t('footer.quickLinks')}
             </h3>
             <ul className="footer__links-list space-y-2">
-              {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((item) => (
-                <li key={item} className="footer__links-item">
+              {[
+                { id: 'home', label: t('nav.home') },
+                { id: 'about', label: t('nav.about') },
+                { id: 'skills', label: t('nav.skills') },
+                { id: 'projects', label: t('nav.projects') },
+                { id: 'contact', label: t('nav.contact') },
+              ].map((item) => (
+                <li key={item.id} className="footer__links-item">
                   <a 
-                    href={`#${item.toLowerCase()}`} 
+                    href={`#${item.id}`} 
                     className="footer__link text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary-light transition-colors"
                   >
-                    {item}
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -61,13 +70,13 @@ const Footer = () => {
           {/* Contact information section */}
           <div className="footer__contact">
             <h3 className="footer__heading text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Contact
+              {t('footer.contactTitle')}
             </h3>
             <ul className="footer__contact-list space-y-3">
               {[
-                { label: 'Email', value: 'garciapagemajaime@gmail.com', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
-                { label: 'Location', value: 'Spain', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
-                { label: 'Availability', value: 'Internship / Full-time', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+                { label: t('footer.emailLabel'), value: 'garciapagemajaime@gmail.com', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+                { label: t('footer.locationLabel'), value: 'Spain', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
+                { label: t('footer.availabilityLabel'), value: 'Internship / Full-time', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
               ].map((contact) => (
                 <li key={contact.label} className="footer__contact-item flex items-start">
                   <svg className="w-5 h-5 text-primary dark:text-primary-light mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -90,7 +99,7 @@ const Footer = () => {
         {/* Copyright section */}
         <div className="footer__bottom mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center">
           <p className="footer__copyright text-gray-600 dark:text-gray-400">
-            © {currentYear} Jaime García-Page. All rights reserved.
+            © {currentYear} Jaime García-Page. {t('footer.copyright')}
           </p>
         </div>
       </div>

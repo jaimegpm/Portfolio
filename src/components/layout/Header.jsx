@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
+import LanguageSelector from '../ui/LanguageSelector';
 
 /**
  * Header Component
@@ -9,6 +11,7 @@ const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const { t } = useLanguage();
 
   // Handle scroll events and initialize dark mode preference
   useEffect(() => {
@@ -83,11 +86,11 @@ const Header = () => {
   };
 
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: t('nav.home') },
+    { id: 'about', label: t('nav.about') },
+    { id: 'skills', label: t('nav.skills') },
+    { id: 'projects', label: t('nav.projects') },
+    { id: 'contact', label: t('nav.contact') },
   ];
 
   return (
@@ -137,6 +140,9 @@ const Header = () => {
 
           {/* Controls */}
           <div className="header__controls flex items-center space-x-4">
+            {/* Language selector */}
+            <LanguageSelector />
+            
             {/* Dark mode button */}
             <button 
               onClick={toggleDarkMode}
