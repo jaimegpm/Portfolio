@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencias
 node_modules
 dist
 dist-ssr
@@ -22,3 +23,47 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Archivos de entorno y configuración
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de configuración con información sensible
+# Nota: Para producción, considera usar variables de entorno en lugar de archivos de configuración
+/src/config/emailjs.js
+
+# Archivos de caché
+.cache/
+.parcel-cache/
+
+# Archivos de cobertura
+coverage/
+
+# Archivos de construcción
+/build/
+/.netlify/
+
+# Archivos temporales
+.temp
+.tmp
+
+# Archivos específicos de macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Archivos específicos de Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Archivos específicos de Linux
+*~
+.directory
+.Trash-*
