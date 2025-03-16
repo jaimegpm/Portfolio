@@ -96,7 +96,9 @@ const es = {
     sendButton: "Enviar Mensaje",
     sending: "Enviando...",
     successMessage: "Tu mensaje ha sido enviado con éxito. ¡Me pondré en contacto contigo pronto!",
-    errorMessage: "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde."
+    errorMessage: "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde.",
+    locationLabel: "Ubicación",
+    phoneLabel: "Teléfono"
   },
 
   // Footer
