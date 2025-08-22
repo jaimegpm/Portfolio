@@ -76,7 +76,7 @@ const Footer = () => {
               {[
                 { label: t('footer.emailLabel'), value: 'garciapagemajaime@gmail.com', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
                 { label: t('footer.locationLabel'), value: 'Spain', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z' },
-                { label: t('footer.availabilityLabel'), value: 'Internship / Full-time', icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
+                { label: t('footer.availabilityLabel'), value: t('about.availabilityValue'), icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' },
               ].map((contact) => (
                 <li key={contact.label} className="footer__contact-item flex items-start">
                   <svg className="w-5 h-5 text-primary dark:text-primary-light mt-0.5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
