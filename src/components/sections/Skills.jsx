@@ -1,38 +1,12 @@
-import { useEffect, useRef } from 'react';
 import SectionTitle from '../ui/SectionTitle';
-import { setupIntersectionObserver } from '../../utils/animations';
 import { useLanguage } from '../../context/LanguageContext';
 
 /**
  * Skills Component
- * Displays technical and soft skills with animated scroll effects
+ * Displays technical skills with animated scroll effects
  */
 const Skills = () => {
-  const skillsRef = useRef(null);
   const { t } = useLanguage();
-  
-  useEffect(() => {
-    if (skillsRef.current) {
-      const observer = setupIntersectionObserver(
-        skillsRef.current,
-        { threshold: 0.2 },
-        (target) => {
-          const skillCharts = target.querySelectorAll('.skills__soft-circle-progress');
-          skillCharts.forEach((chart, index) => {
-            setTimeout(() => {
-              chart.style.strokeDashoffset = chart.dataset.progress;
-            }, 150 * index);
-          });
-        }
-      );
-      
-      return () => {
-        if (observer) {
-          observer.disconnect();
-        }
-      };
-    }
-  }, []);
 
   const frontendSkills = [
     { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
@@ -61,15 +35,6 @@ const Skills = () => {
     { name: 'Figma', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' },
     { name: 'React Native', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
     { name: 'NPM', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg' },
-  ];
-  
-  const softSkills = [
-    { name: t('skills.softSkills.communication'), value: 85 },
-    { name: t('skills.softSkills.teamwork'), value: 90 },
-    { name: t('skills.softSkills.problemSolving'), value: 85 },
-    { name: t('skills.softSkills.adaptability'), value: 90 },
-    { name: t('skills.softSkills.timeManagement'), value: 80 },
-    { name: t('skills.softSkills.creativity'), value: 85 },
   ];
   
   /**
@@ -133,61 +98,6 @@ const Skills = () => {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-        
-        {/* Soft skills with circular progress charts */}
-        <div ref={skillsRef} className="skills__soft">
-          <h3 className="skills__subtitle text-xl font-semibold mb-8 text-gray-800 dark:text-gray-200 text-center">
-            {t('skills.soft')}
-          </h3>
-          <div className="skills__soft-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {softSkills.map((skill, index) => (
-              <div 
-                key={index} 
-                className="skills__soft-item flex flex-col items-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <div className="skills__soft-chart relative w-24 h-24 mb-4">
-                  <svg className="skills__soft-circle w-full h-full" viewBox="0 0 100 100">
-                    <circle 
-                      className="skills__soft-circle-bg text-gray-200 dark:text-gray-700 stroke-current" 
-                      strokeWidth="10" 
-                      cx="50" 
-                      cy="50" 
-                      r="40" 
-                      fill="transparent"
-                    />
-                    <circle 
-                      className="skills__soft-circle-progress stroke-current" 
-                      strokeWidth="10" 
-                      strokeLinecap="round" 
-                      cx="50" 
-                      cy="50" 
-                      r="40" 
-                      fill="transparent"
-                      strokeDasharray={`${2 * Math.PI * 40}`}
-                      strokeDashoffset={`${2 * Math.PI * 40}`}
-                      data-progress={`${2 * Math.PI * 40 * (1 - skill.value / 100)}`}
-                      transform="rotate(-90 50 50)"
-                      style={{
-                        stroke: 'url(#gradient)',
-                        transition: 'stroke-dashoffset 1.5s ease-in-out'
-                      }}
-                    />
-                    <defs>
-                      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="var(--color-primary)" />
-                        <stop offset="100%" stopColor="var(--color-secondary)" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                  <div className="skills__soft-percentage absolute inset-0 flex items-center justify-center text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                    {skill.value}%
-                  </div>
-                </div>
-                <span className="skills__soft-name text-center font-medium text-gray-800 dark:text-gray-200">{skill.name}</span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
