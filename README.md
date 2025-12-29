@@ -63,6 +63,6 @@ npm run deploy
 <div align="center">
   
 [![GitHub](https://img.shields.io/badge/GitHub-jaimegpm-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jaimegpm)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jaime_García--Page-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jaime-garc%C3%ADa-page-marchante-a9a9a9246/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jaime_García--Page-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)]([https://www.linkedin.com/in/jaime-garc%C3%ADa-page-marchante-a9a9a9246/](https://www.linkedin.com/in/jaime-garc%C3%ADa-page-a547081b8/))
 
 </div>
