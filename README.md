@@ -1,68 +1,59 @@
-<div align="center">
+# Portfolio
 
-# Portfolio - Jaime García-Page
+Personal site of Jaime García-Page, backend and middleware developer.
+Live at <https://jaimegpm.github.io/Portfolio/>.
 
-[![View Portfolio](https://img.shields.io/badge/View%20Portfolio-2563EB?style=for-the-badge&logo=github&logoColor=white)](https://jaimegpm.github.io/Portfolio/)
+## Stack
 
-</div>
+- React 19 and TypeScript
+- Vite 8
+- Tailwind CSS 4, with every colour and font defined once in `src/styles/tokens.css`
+- No runtime dependencies beyond React: fonts are self hosted, there are no
+  analytics, no external requests and no forms
 
-A modern and responsive personal portfolio showcasing my skills, projects, and experience as a web developer. Designed with a focus on user experience, smooth animations, and modern aesthetics.
+## Development
 
-![Portfolio Preview](public/images/portfolio-preview.png)
+```bash
+npm install
+npm run dev
+```
 
-## 🚀 Technologies Used
+Other scripts:
 
-<div align="center">
-  
-![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![EmailJS](https://img.shields.io/badge/EmailJS-2563EB?style=for-the-badge&logo=gmail&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+```bash
+npm run typecheck
+npm run lint
+npm run build
+npm run preview
+npm test
+```
 
-</div>
+Browser regression tests use Microsoft Edge through Playwright. They run
+against a fresh production build, including its Content Security Policy.
+The accessibility scan bypasses the policy only to inject axe into its own
+isolated browser context.
 
-## ⚡ Features
+## Deployment
 
-- Responsive design for all devices
-- Automatic and manual dark/light mode
-- Smooth animations and visual effects
-- Custom cursor and interactive elements
-- Functional contact form with EmailJS
-- Optimized for performance and SEO
-
-## 🔧 Quick Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/jaimegpm/Portfolio.git
-   cd Portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure EmailJS** (optional for contact form)
-   - Create `src/config/emailjs.js` file with your credentials
-
-4. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-## 📦 Deployment
+The site is a static build published to GitHub Pages from the `dist` folder:
 
 ```bash
 npm run deploy
 ```
----
-<div align="center">
-  
-[![GitHub](https://img.shields.io/badge/GitHub-jaimegpm-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jaimegpm)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jaime_García--Page-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jaime-garc%C3%ADa-page-a547081b8/)
 
-</div>
+The production build adds a Content Security Policy that only allows the
+site's own scripts, styles, fonts and images. Development keeps it off because
+Vite injects its own inline scripts there.
+
+## Layout
+
+| Path                      | Holds                                             |
+| ------------------------- | ------------------------------------------------- |
+| `src/styles/`             | design tokens, base styles and the Tailwind entry |
+| `src/i18n/`               | Spanish and English dictionaries and the provider |
+| `src/data/`               | profile, projects and stack                       |
+| `src/components/`         | layout, sections and shared pieces                |
+| `src/effects/`            | the byte trail behind the cursor and small hooks  |
+| `src/theme/`              | theme state and the animated theme switch         |
+| `public/fonts/`           | Doto and JetBrains Mono, woff2                    |
+| `public/cursors/`         | the custom cursor, one file per theme and state   |
