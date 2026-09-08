@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "npm run build && playwright test",
+    "og": "node tools/og.mjs",
     "deploy": "vite build && gh-pages -d dist"
   },
   "dependencies": {
