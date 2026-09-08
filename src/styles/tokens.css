@@ -17,7 +17,6 @@
 
 :root {
   color-scheme: dark;
-  --beam: rgb(125 255 99 / 0.05);
   --dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Crect x='4.5' y='4.5' width='3' height='3' fill='%237dff63' fill-opacity='.16'/%3E%3C/svg%3E");
   --gutter: 20px;
   --header-h: 60px;
@@ -35,7 +34,6 @@
   --color-line-2: #b9c2b1;
   --color-accent: #1c792b;
   --color-accent-ink: #f2f3ea;
-  --beam: rgb(28 122 43 / 0.06);
   --dots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Crect x='4.5' y='4.5' width='3' height='3' fill='%231c7a2b' fill-opacity='.2'/%3E%3C/svg%3E");
 }
 

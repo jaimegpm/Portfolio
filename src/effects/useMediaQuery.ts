@@ -19,10 +19,6 @@ export function useMediaQuery(query: string): boolean {
   return useSyncExternalStore(subscribeTo(query), () => matchMedia(query).matches, () => false)
 }
 
-export function useReducedMotion(): boolean {
-  return useMediaQuery('(prefers-reduced-motion: reduce)')
-}
-
 export function useFinePointer(): boolean {
   return useMediaQuery('(pointer: fine)')
 }

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState, type RefObject } from 'react'
 
 import type { FrameTerminal } from '@/data/eclipsecode'
-import { useReducedMotion } from '@/effects/useMediaQuery'
 
 const START_MS = 500
 const ASK_MS = 14
@@ -102,7 +101,6 @@ function stateAt(line: Timeline, t: number, tokens: number): Playback {
   }
 }
 export function useScenario(terminals: readonly FrameTerminal[], askLength: number, tokens: number, frame: RefObject<HTMLElement | null>) {
-  const reduced = useReducedMotion()
   const line = useMemo(() => timeline(terminals, askLength), [terminals, askLength])
   const [startedAt, setStartedAt] = useState<number | null>(null)
   const [elapsed, setElapsed] = useState(0)
@@ -126,14 +124,14 @@ export function useScenario(terminals: readonly FrameTerminal[], askLength: numb
     return () => observer.disconnect()
   }, [frame, startedAt])
 
-  const playing = startedAt !== null && !reduced && elapsed < line.total
+  const playing = startedAt !== null && elapsed < line.total
   useEffect(() => {
     if (!playing || startedAt === null) return
     const timer = window.setInterval(() => setElapsed(performance.now() - startedAt), TICK_MS)
     return () => window.clearInterval(timer)
   }, [playing, startedAt])
 
-  const shown = reduced ? line.total : startedAt === null ? 0 : elapsed
+  const shown = startedAt === null ? 0 : elapsed
   const state = useMemo(() => stateAt(line, shown, tokens), [line, shown, tokens])
 
   const replay = () => {

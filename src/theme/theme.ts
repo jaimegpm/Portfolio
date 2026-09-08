@@ -31,9 +31,7 @@ export function useTheme(): Theme {
 
 export function toggleTheme() {
   const next: Theme = readTheme() === 'dark' ? 'light' : 'dark'
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  if (!document.startViewTransition || reduced) {
+  if (!document.startViewTransition) {
     writeTheme(next)
     return
   }

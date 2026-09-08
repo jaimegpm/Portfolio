@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { useReducedMotion } from '@/effects/useMediaQuery'
 import type { TerminalCommand, TerminalStep } from '@/i18n/types'
 import { scrollToSection } from '@/lib/scroll'
 
@@ -20,7 +19,6 @@ interface TerminalProps {
 }
 
 export function Terminal({ user, prompt, session, intro, commands, skipLabel, summary }: TerminalProps) {
-  const reduced = useReducedMotion()
   const [lines, setLines] = useState<Line[]>([])
   const [busy, setBusy] = useState(true)
   const output = useRef<HTMLPreElement>(null)
@@ -36,11 +34,6 @@ export function Terminal({ user, prompt, session, intro, commands, skipLabel, su
   }, [])
   const play = useCallback(
     (step: TerminalStep, done: () => void) => {
-      if (reduced) {
-        setLines((current) => [...current, { kind: 'cmd', text: step.cmd }, { kind: 'out', text: step.out }])
-        done()
-        return
-      }
       setLines((current) => [...current, { kind: 'cmd', text: '' }])
       let index = 0
       const tick = () => {
@@ -57,7 +50,7 @@ export function Terminal({ user, prompt, session, intro, commands, skipLabel, su
       }
       later(tick, 60)
     },
-    [later, reduced],
+    [later],
   )
   useEffect(() => {
     let at = 0

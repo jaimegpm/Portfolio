@@ -88,7 +88,7 @@ export function AgentView({ lang, agents, agentId, chatId, tab, transcript, tran
             <p className="truncate text-[10px] text-muted">{agent.purpose[lang]}</p>
           </div>
           <span className="hidden shrink-0 items-center gap-1.5 text-[10px] text-muted md:flex">
-            <span className={`size-1.5 rounded-full ${working ? 'bg-accent motion-safe:animate-pulse' : 'bg-muted'}`} />
+            <span className={`size-1.5 rounded-full ${working ? 'bg-accent animate-pulse' : 'bg-muted'}`} />
             {working} working
           </span>
           <div role="tablist" aria-label="Agent" className="hidden shrink-0 items-center gap-0.5 rounded-[6px] bg-bg-2 p-0.5 md:flex">

@@ -21,6 +21,8 @@ test('content fits phone and tablet viewports', async ({ page }) => {
 
 test('Fleet opens the chosen terminal after another was maximized', async ({ page }) => {
   await page.goto('./')
+  await page.getByRole('group', { name: /^Maqueta/ }).scrollIntoViewIfNeeded()
+  await expect(page.getByRole('button', { name: 'Close Grok', exact: true })).toBeVisible({ timeout: 20000 })
   await page.getByTitle('Maximize terminal').first().click()
   await page.getByRole('button', { name: 'Fleet', exact: true }).click()
   await page.locator('button[title$="in the grid"]').last().click()
@@ -42,11 +44,14 @@ test('rapid theme switches have no unhandled rejection', async ({ page }) => {
   expect(errors).toEqual([])
 })
 
-test('byte trail clears on pointer leave', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'no-preference' })
+test('animations ignore reduced motion and byte trail clears on pointer leave', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('./')
   const canvas = page.locator('canvas')
   await expect(canvas).toBeVisible()
+  await expect(page.locator('#home .beam')).toHaveCount(0)
+  await expect(page.locator('#home .caret').first()).toHaveCSS('animation-name', 'blink')
+  await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'smooth')
   await page.waitForTimeout(100)
   await page.mouse.move(400, 400)
   const painted = () => canvas.evaluate((c: HTMLCanvasElement) => c.getContext('2d')!.getImageData(0, 0, c.width, c.height).data.some((v, i) => i % 4 === 3 && v > 0))

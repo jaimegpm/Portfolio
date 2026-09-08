@@ -1,12 +1,10 @@
 import { Terminal } from '@/components/hero/Terminal'
 import { LinkButton } from '@/components/ui/LinkButton'
 import { profile } from '@/data/profile'
-import { useReducedMotion } from '@/effects/useMediaQuery'
 import { useLanguage } from '@/i18n'
 
 export function Hero() {
   const { t, lang } = useLanguage()
-  const reduced = useReducedMotion()
 
   return (
     <section
@@ -14,7 +12,6 @@ export function Hero() {
       className="relative flex flex-col justify-end overflow-hidden px-[var(--gutter)] pt-16 pb-9 md:min-h-[828px] md:pt-[104px] md:pb-14"
     >
       <div aria-hidden="true" className="dots-bg pointer-events-none absolute inset-0" />
-      {!reduced && <div aria-hidden="true" className="beam pointer-events-none absolute inset-x-0" />}
 
       <p className="label relative mb-5 text-muted md:mb-6">{t.hero.eyebrow}</p>
       <h1 className="display relative flex flex-col text-[clamp(44px,9.4vw,132px)] whitespace-nowrap">

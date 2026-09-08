@@ -203,15 +203,6 @@ section[id] {
   background-image: var(--dots);
 }
 
-.beam {
-  top: -180px;
-  height: 160px;
-  background: var(--beam);
-  border-bottom: 1px solid var(--color-accent);
-  opacity: 0.7;
-  animation: sweep 11s linear infinite;
-}
-
 .numbered {
   counter-reset: item;
 }
@@ -230,30 +221,5 @@ section[id] {
 @keyframes blink {
   to {
     visibility: hidden;
-  }
-}
-
-@keyframes sweep {
-  to {
-    transform: translateY(1100px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .reveal {
-    opacity: 1;
-    translate: none;
-    transition: none;
-  }
-  .caret,
-  .beam {
-    animation: none;
-  }
-  .esp,
-  .esp-tag {
-    transition: none;
   }
 }

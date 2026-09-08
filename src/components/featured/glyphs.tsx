@@ -73,7 +73,7 @@ export const ArrowUpGlyph = (p: GlyphProps) => (
 )
 
 export const SpinGlyph = (p: GlyphProps) => (
-  <Glyph {...p} className={`motion-safe:animate-spin ${p.className ?? ''}`}>
+  <Glyph {...p} className={`animate-spin ${p.className ?? ''}`}>
     <path d="M21 12a9 9 0 1 1-6.2-8.6" />
   </Glyph>
 )

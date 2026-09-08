@@ -183,7 +183,7 @@ function PaneCard({
       <header className="flex h-7 shrink-0 items-center gap-2 border-b border-line px-2">
         <span
           title={status}
-          className={`size-1.5 shrink-0 rounded-full ${pane.working ? 'bg-accent motion-safe:animate-pulse' : pane.waiting ? 'bg-accent/70' : 'bg-muted'}`}
+          className={`size-1.5 shrink-0 rounded-full ${pane.working ? 'bg-accent animate-pulse' : pane.waiting ? 'bg-accent/70' : 'bg-muted'}`}
         />
         <span className="min-w-0 flex-1 truncate font-medium text-fg">{pane.title}</span>
         {marker && (

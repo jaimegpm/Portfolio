@@ -46,7 +46,7 @@ export function FleetView({ lang, agents, terminals, playback, closed, idle, onO
                 <header className="flex items-center gap-1.5 px-1 pb-1.5">
                   <span
                     aria-hidden="true"
-                    className={`size-1.5 rounded-full ${held.length ? 'bg-accent' : 'bg-muted'} ${room.state === 'working' && held.length ? 'motion-safe:animate-pulse' : ''}`}
+                    className={`size-1.5 rounded-full ${held.length ? 'bg-accent' : 'bg-muted'} ${room.state === 'working' && held.length ? 'animate-pulse' : ''}`}
                   />
                   <h3 className="label text-[10px] text-muted">{room.label}</h3>
                   <span className="ml-auto text-[10px] text-muted tabular-nums">{held.length}</span>
@@ -103,7 +103,7 @@ export function FleetView({ lang, agents, terminals, playback, closed, idle, onO
                   <span
                     aria-hidden="true"
                     title={state?.done ? 'Waiting in the terminal' : 'Working'}
-                    className={`ml-1 size-1.5 shrink-0 rounded-full ${state?.done ? 'bg-muted' : 'bg-accent motion-safe:animate-pulse'}`}
+                    className={`ml-1 size-1.5 shrink-0 rounded-full ${state?.done ? 'bg-muted' : 'bg-accent animate-pulse'}`}
                   />
                 </button>
               ))}
