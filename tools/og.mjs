@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 import { chromium } from '@playwright/test'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const out = resolve(root, 'public/og.png')
+const out = resolve(root, 'src/assets/og.png')
 
 const font = async (file) => (await readFile(resolve(root, 'public/fonts', file))).toString('base64')
 const doto = await font('doto-latin.woff2')

@@ -96,10 +96,23 @@ test('language, theme, navigation and local resources work in the production bui
   const cv = await request.get(await page.getByRole('link', { name: 'CV (pdf)' }).getAttribute('href') ?? '')
   expect(cv.status()).toBe(200)
   expect(cv.headers()['content-type']).toContain('application/pdf')
-  for (const resource of ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png', 'og.png', 'fonts/doto-latin.woff2', 'fonts/jetbrains-mono-latin.woff2', 'cursors/arrow-dark.svg', 'cursors/arrow-light.svg', 'cursors/pointer-dark.svg', 'cursors/pointer-light.svg']) {
+  for (const resource of ['favicon.svg', 'favicon-32.png', 'apple-touch-icon.png', 'fonts/doto-latin.woff2', 'fonts/jetbrains-mono-latin.woff2', 'cursors/arrow-dark.svg', 'cursors/arrow-light.svg', 'cursors/pointer-dark.svg', 'cursors/pointer-light.svg']) {
     expect((await request.get(resource)).status(), resource).toBe(200)
   }
   expect(errors).toEqual([])
+})
+
+test('the social card is a fingerprinted absolute image', async ({ page, request }) => {
+  await page.goto('./')
+  const meta = (property: string) => page.locator(`meta[property="${property}"]`).getAttribute('content')
+  const card = await meta('og:image') ?? ''
+  expect(card).toMatch(/^https:\/\/jaimegpm\.github\.io\/Portfolio\/assets\/og-[\w-]+\.png$/)
+  const image = await request.get(new URL(card).pathname)
+  expect(image.status()).toBe(200)
+  expect(image.headers()['content-type']).toBe('image/png')
+  const bytes = await image.body()
+  expect(String(bytes.readUInt32BE(16))).toBe(await meta('og:image:width'))
+  expect(String(bytes.readUInt32BE(20))).toBe(await meta('og:image:height'))
 })
 
 test('all mockup modes pass the accessibility scan in both themes', async ({ browser }) => {

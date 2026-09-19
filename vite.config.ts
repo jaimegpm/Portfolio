@@ -38,9 +38,22 @@ function contentSecurityPolicy(): Plugin {
   }
 }
 
+const SITE_ORIGIN = 'https://jaimegpm.github.io'
+
+function absoluteSocialImage(): Plugin {
+  return {
+    name: 'absolute-social-image',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler: (html) => html.replace(/(<meta\s+property="og:image"\s+content=")(?!https?:)/, `$1${SITE_ORIGIN}`),
+    },
+  }
+}
+
 export default defineConfig({
   base: '/Portfolio/',
-  plugins: [react(), tailwindcss(), contentSecurityPolicy()],
+  plugins: [react(), tailwindcss(), absoluteSocialImage(), contentSecurityPolicy()],
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
